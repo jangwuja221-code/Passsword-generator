@@ -7,7 +7,7 @@ body {
 .container {
     background: linear-gradient(90deg, #F6CFBE, #B9DCF2);
  
-    min-width:20rem;
+    min-width:15rem;
     border: 0.2rem solid #b9dcf2;
     border-radius: 1rem;
     padding: 2rem 2rem;
