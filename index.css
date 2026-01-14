@@ -1,112 +1,135 @@
+/* --- Global Resets & Responsiveness --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color:#f7e9e8;
+    background-color: #f7e9e8;
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    padding: 20px; /* Padding for mobile screens */
 }
+
+/* --- Main Container --- */
 .container {
     background: linear-gradient(90deg, #F6CFBE, #B9DCF2);
- 
-    min-width:15rem;
+    max-width: 450px;
+    width: 100%; /* Changed from 90% for better edge handling */
     border: 0.2rem solid #b9dcf2;
     border-radius: 1rem;
-    padding: 2rem 2rem;
+    padding: 2rem;
+    gap:1rem;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-.password {
-    margin-bottom:1rem;
-    display: flex;
-    flex-direction: row;
-}
-#password-one,#password-two {
-    border-radius: 0.2rem;
-    border:none;
 
+/* --- Password Display Section --- */
+.password {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column; /* Stacked on mobile */
+    gap: 15px;
+    width: 100%;
 }
+
+/* Media Query for side-by-side passwords on larger screens */
+@media (min-width: 400px) {
+    .password {
+        flex-direction: row; 
+    }
+}
+
+#password-one, #password-two {
+    border-radius: 0.2rem;
+    border: none;
+    padding: 0.6rem;
+    width: 100%; /* Makes them fill their container */
+    font-size: 14px;
+}
+
+/* --- Buttons & Icons --- */
 #btn {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: #e8dad5;
-    border-radius:0.2rem;
-    border:0.1rem solid #b9dcf2;
-    padding:0.2rem 0.4rem;
-    
+    border-radius: 0.2rem;
+    border: 0.1rem solid #b9dcf2;
+    padding: 0.5rem 1rem; /* Slightly larger for touch */
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s;
 }
+
 #btn:active {
-  transform: scale(0.95);
-  background-color: #d1c4c0;
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+    background-color: #d1c4c0;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1);
 }
+
 #copy-btn {
-    margin-right:1rem;
+    margin-right: 0; /* Handled by gap/flex now */
+    margin-bottom: 10px;
 }
+
+@media (min-width: 400px) {
+    #copy-btn {
+        margin-right: 1rem;
+        margin-bottom: 0;
+    }
+}
+
 .copy-icon {
-  cursor: pointer;
-  font-size: 18px; /* Adjust size */
-  color: #666;     /* Subtle grey color */
-  transition: color 0.2s;
-  user-select: none; /* Prevents the icon itself from being highlighted */
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    transition: color 0.2s;
+    user-select: none;
 }
 
 .copy-icon:hover {
-  color: #000;     /* Darkens when you hover over it */
-}
-.toast {
-  visibility: hidden; /* Hidden by default */
-  min-width: 250px;
-  background-color:rgba(40, 45, 49, 0.85); /* Dark grey/black */
-  color: #fff;
-  text-align: center;
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-  transform: translateX(-50%); /* Centers it perfectly */
-  font-family:'Inter', sans-serif;
-  box-shadow: 0 4px 12px rgba(81, 75, 75, 0.2);
+    color: #000;
 }
 
-/* This class will be added by JavaScript to show the toast */
-.toast.show {
-  visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-/* Animations for smooth entry/exit */
-@keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
-}
-
-@keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
-}
+/* --- Settings & Sliders --- */
 .length-container {
     margin: 20px 0;
     color: #2b283a;
     font-weight: bold;
+    text-align: center;
+    width: 100%;
 }
 
 #length-slider {
-    width: 200px;
+    width: 100%; /* Fluid width */
+    max-width: 250px;
     cursor: pointer;
     display: block;
     margin: 10px auto;
 }
+
 .settings {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns */
-    gap: 10px;
-    margin-bottom: 1px;
+    grid-template-columns: 1fr; /* 1 column on small phones */
+    gap: 12px;
+    margin-bottom: 1rem;
     color: #2b283a;
     font-size: 14px;
+    width: 100%;
+}
+
+@media (min-width: 350px) {
+    .settings {
+        grid-template-columns: 1fr 1fr; /* 2 columns for average phones */
+    }
 }
 
 .settings label {
@@ -115,23 +138,36 @@ body {
     gap: 8px;
     cursor: pointer;
 }
+
 .error-icon, .checkmark {
     margin-right: 8px;
     font-weight: bold;
 }
+
+/* --- Strength Meter --- */
+.strength-container {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
 .strength-bar-bg {
     background-color: #e0e0e0;
     border-radius: 10px;
     height: 10px;
     width: 100%;
+    max-width: 300px;
     margin-top: 5px;
-    overflow: hidden; /* Keeps the inner bar inside the rounded corners */
+    overflow: hidden;
 }
 
 .strength-bar {
     height: 100%;
-    width: 0%; /* Starts at 0 */
-    transition: width 0.4s ease, background-color 0.4s ease; /* Makes it slide smoothly */
+    width: 0%;
+    transition: width 0.4s ease, background-color 0.4s ease;
 }
 
 #strength-text {
@@ -139,12 +175,39 @@ body {
     text-transform: uppercase;
     font-size: 12px;
 }
-.strength-container {
-    margin: 20px 0; /* 25px top/bottom, 0 left/right */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px; /* Space between the label "Strength: MEDIUM" and the bar */
+
+/* --- Toast Notification --- */
+.toast {
+    visibility: hidden;
+    min-width: 200px;
+    width: 80%; /* Fluid width on mobile */
+    max-width: 300px;
+    background-color: rgba(40, 45, 49, 0.85);
+    color: #fff;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 16px;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 12px rgba(81, 75, 75, 0.2);
 }
 
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
 
+@keyframes fadein {
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { bottom: 30px; opacity: 1; }
+    to { bottom: 0; opacity: 0; }
+}
