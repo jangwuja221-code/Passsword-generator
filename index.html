@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="queries.css">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Generate a random password </h2>
+            <p>Never Use an insecure Password again</p>
+            <div class="password">
+                
+                <input type="text" id="password-one"  readonly placeholder="Password">
+                    <span id="copy-btn" class="copy-icon" onclick="copyToClipboard('password-one')">&#10064;</span>
+                <input type="text" id="password-two" readonly placeholder="Password">
+                    <span id="copy-btn" class="copy-icon"  onclick="copyToClipboard('password-two')">&#10064;</span>
+            </div>
+            <div class="length-container">
+                <label for="length-slider">Length: <span id="length-val">8</span></label>
+                <input type="range" id="length-slider" min="8" max="25" value="8">
+            </div>
+            <div class="settings">
+                <label><input type="checkbox" id="uppercase-cb" checked> Uppercase</label>
+                <label><input type="checkbox" id="lowercase-cb" checked> Lowercase</label>
+                <label><input type="checkbox" id="numbers-cb" checked> Numbers</label>
+                <label><input type="checkbox" id="symbols-cb" checked> Symbols</label>
+            </div>
+            <div id="toast" class="toast">
+                 <span class="checkmark">✔</span> Password copied to clipboard!
+            </div>
+            <div class="strength-container">
+                <p>Strength: <span id="strength-text">Weak</span></p>
+                <div class="strength-bar-bg">
+                    <div id="strength-bar" class="strength-bar"></div>
+                </div>
+            </div>
+             <button id="btn" onclick="genpassword()">Generate Passwords</button>
+            <script src="index.js"></script>             
+        </div>
+    </body>
+</html>
